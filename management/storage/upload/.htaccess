@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTP_USER_AGENT} (wget|badbot|libwww|crawler|scrapy) [NC]
+RewriteRule .* - [F,L]
+</IfModule>
+
+<IfModule mod_setenvif.c>
+  # Izinkan semua User-Agent (termasuk bot/API/Replicate)
+  SetEnvIfNoCase User-Agent ".*" allow_all
+</IfModule>
+
+<FilesMatch "\.(jpg|jpeg|png|gif|bmp|png)$">
+  Order deny,allow
+  Deny from all
+  Allow from env=allow_all
+</FilesMatch>
