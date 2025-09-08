@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>404 Page Not Found</title>
+
+    <!-- Google Font -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=fallback"
+    />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css" />
+    <!-- AdminLTE -->
+    <link rel="stylesheet" href="dist/css/adminlte.min.css" />
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f4f6f9;
+        font-family: "Source Sans Pro", sans-serif;
+      }
+      .error-container {
+        text-align: center;
+        padding: 20px;
+      }
+      .error-code {
+        font-size: 120px;
+        font-weight: 900;
+        color: #ffc107;
+        margin: 0;
+      }
+      .error-message {
+        font-size: 24px;
+        font-weight: 600;
+        margin-top: 10px;
+        color: #343a40;
+      }
+      .error-description {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #6c757d;
+      }
+      .btn-dashboard {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="error-container">
+      <div class="error-code">404</div>
+      <div class="error-message">
+        <i class="fas fa-exclamation-triangle text-warning"></i> Oops! Page not
+        found.
+      </div>
+      <div class="error-description">
+        The page you are looking for might have been removed,<br />
+        had its name changed, or is temporarily unavailable.
+      </div>
+      <a
+        href="https://dikgroup.id/management/"
+        class="btn btn-warning btn-dashboard"
+      >
+        <i class="fas fa-home"></i> Back to Dashboard
+      </a>
+    </div>
+
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

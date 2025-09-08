@@ -1,0 +1,32 @@
+[13-Sep-2022 05:20:21 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[13-Sep-2022 05:20:45 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 22
+[16-Sep-2022 02:21:44 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[16-Sep-2022 02:21:53 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[16-Sep-2022 02:21:59 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[16-Sep-2022 02:22:34 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 22
+[15-Nov-2022 02:11:16 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 22
+[22-Nov-2022 11:53:56 UTC] PHP Warning:  Undefined array key "username" in /home/dggroupi/management/controller/conn_login.php on line 6
+[22-Nov-2022 11:53:56 UTC] PHP Warning:  Undefined array key "password" in /home/dggroupi/management/controller/conn_login.php on line 7
+[22-Nov-2022 11:53:56 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 11:54:27 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 11:54:30 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 11:54:32 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 11:54:35 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 11:54:37 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 11:54:39 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 11:56:35 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 11:56:38 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 11:56:41 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 11:56:44 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 11:56:46 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 11:56:48 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 12:00:46 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 12:00:47 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 12:00:49 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 12:00:50 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 12:00:51 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[22-Nov-2022 12:00:53 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/dggroupi/management/controller/conn_login.php on line 32
+[13-Dec-2022 12:11:24 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/dggroupi/management/controller/conn_login.php:9) in /home/dggroupi/management/controller/conn_login.php on line 30
+[13-Dec-2022 12:11:46 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/dggroupi/management/controller/conn_login.php:9) in /home/dggroupi/management/controller/conn_login.php on line 30
+[13-Dec-2022 12:11:55 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/dggroupi/management/controller/conn_login.php:9) in /home/dggroupi/management/controller/conn_login.php on line 34
+[13-Dec-2022 12:12:08 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/dggroupi/management/controller/conn_login.php:9) in /home/dggroupi/management/controller/conn_login.php on line 30
