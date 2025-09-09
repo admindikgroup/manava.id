@@ -132,7 +132,6 @@ if($_SESSION['status'] =="xx"){
                 <input type="email" class="form-control" placeholder="Email" name="email" required>
               </div>
               <div class="input-group mb-3">
-<<<<<<< HEAD
                 <input type="password" class="form-control" id="password" 
                   placeholder="Password" name="password" 
                   required>
@@ -151,39 +150,11 @@ if($_SESSION['status'] =="xx"){
               </div>
               <p id="match-message" style="font-size:13px; color:red; display:none;">❌ Password tidak cocok</p>
                             <div class="row">
-=======
-                <input type="password" class="form-control" placeholder="Password" name="password" required>
-              </div>
-              <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" required>
-              </div>
-              <div class="row">
->>>>>>> b652d5d4d0ddb874f39f2293d32b75f93016254d
                 <div class="col-12">
                   <button type="submit" class="btn btn-primary btn-block">Register</button>
                 </div>
               </div>
             </form>
-<<<<<<< HEAD
-=======
-
-            <!-- OTP FORM -->
-            <form id="otpForm" style="display: none; margin-top: 20px;">
-              <input type="hidden" id="otpEmail" name="email">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" name="otp" placeholder="Masukkan kode OTP" required>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <button type="submit" class="btn btn-success btn-block">Verifikasi Email</button>
-                </div>
-              </div>
-              <p id="resend-wrapper">
-                <a href="#" id="resend-link" onclick="resendOTP(event)">Resend OTP</a>
-                <span id="cooldown-text" style="display:none; color: gray;"></span>
-              </p>
-            </form>
->>>>>>> b652d5d4d0ddb874f39f2293d32b75f93016254d
             <!-- Forgot Password Link -->
             <p class="forgot-password text-center mb-1" style="margin-top: 10px;">
               <a href="forgot_password.php" style="color: white;">Forgot Password?</a>
