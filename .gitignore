@@ -1,2 +1,5 @@
 # Ignore environment config
 .env
+
+management/callback.php
+management/controller/conn_googleoauth.php
