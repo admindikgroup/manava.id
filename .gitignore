@@ -1,2 +1,6 @@
-# Ignore environment config
-.env
+# Jangan commit secret
+management/callback.php
+management/view/ajax/chat_api*.php
+management/view/ajax/*debug*.json
+management/view/ajax/error_log
+management/storage/ai/img/
