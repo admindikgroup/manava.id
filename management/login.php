@@ -132,33 +132,28 @@ if($_SESSION['status'] =="xx"){
                 <input type="email" class="form-control" placeholder="Email" name="email" required>
               </div>
               <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Password" name="password" required>
+                <input type="password" class="form-control" id="password" 
+                  placeholder="Password" name="password" 
+                  required>
               </div>
+              <div id="password-rules" style="font-size: 13px; color: white; margin-bottom: 10px;">
+                <p id="rule-length" style="color:red;">❌ Minimal 8 karakter</p>
+                <p id="rule-lower" style="color:red;">❌ Minimal 1 huruf kecil</p>
+                <p id="rule-upper" style="color:red;">❌ Minimal 1 huruf besar</p>
+                <p id="rule-number" style="color:red;">❌ Minimal 1 angka</p>
+                <p id="rule-special" style="color:red;">❌ Minimal 1 karakter spesial (!@#$%^&*)</p>
+              </div>
+
               <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" required>
+                <input type="password" class="form-control" id="confirm_password" 
+                  placeholder="Confirm Password" name="confirm_password" required>
               </div>
-              <div class="row">
+              <p id="match-message" style="font-size:13px; color:red; display:none;">❌ Password tidak cocok</p>
+                            <div class="row">
                 <div class="col-12">
                   <button type="submit" class="btn btn-primary btn-block">Register</button>
                 </div>
               </div>
-            </form>
-
-            <!-- OTP FORM -->
-            <form id="otpForm" style="display: none; margin-top: 20px;">
-              <input type="hidden" id="otpEmail" name="email">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" name="otp" placeholder="Masukkan kode OTP" required>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <button type="submit" class="btn btn-success btn-block">Verifikasi Email</button>
-                </div>
-              </div>
-              <p id="resend-wrapper">
-                <a href="#" id="resend-link" onclick="resendOTP(event)">Resend OTP</a>
-                <span id="cooldown-text" style="display:none; color: gray;"></span>
-              </p>
             </form>
             <!-- Forgot Password Link -->
             <p class="forgot-password text-center mb-1" style="margin-top: 10px;">
@@ -189,7 +184,6 @@ if($_SESSION['status'] =="xx"){
     function toggleForm() {
       const loginForm = document.getElementById('loginForm');
       const registerForm = document.getElementById('registerForm');
-      const otpForm = document.getElementById('otpForm');
       const formTitle = document.getElementById('form-title');
       const toggleText = document.getElementById('toggle-text');
       const toggleLink = document.getElementById('toggle-link');
@@ -197,101 +191,83 @@ if($_SESSION['status'] =="xx"){
       if (registerForm.style.display === "none") {
         registerForm.style.display = "block";
         loginForm.style.display = "none";
-        otpForm.style.display = "none";
+        
         formTitle.innerHTML = "Create Account";
         toggleText.querySelector('span').innerText = "Already have an account?";
         toggleLink.innerText = "Login";
       } else {
         registerForm.style.display = "none";
         loginForm.style.display = "block";
-        otpForm.style.display = "none";
         formTitle.innerHTML = "Hello,<br>Welcome back";
         toggleText.querySelector('span').innerText = "Don't have an account?";
         toggleLink.innerText = "Sign Up";
       }
     }
 
-    $('#registerForm').on('submit', function (e) {
-      e.preventDefault();
-      $.ajax({
-        url: 'controller/conn_register.php',
-        type: 'POST',
-        data: $(this).serialize(),
-         dataType: 'json',
-      success: function (res) {
-        if (res.status === 'success') {
-          $('#messageBox').html('<div class="alert alert-success">' + res.message + '</div>');
-          $('#registerForm').hide();
-          $('#otpForm').show();
-          $('#otpEmail').val($('input[name="email"]').val());
-        } else {
-         $('#messageBox').html('<div class="alert">' + res.message + '</div>');
-        }
-      },
-      });
-    });
-
- $('#otpForm').on('submit', function (e) {
+$('#registerForm').on('submit', function (e) { 
   e.preventDefault();
   $.ajax({
-    url: 'controller/verify_otp.php',
+    url: 'controller/conn_register.php',
     type: 'POST',
     data: $(this).serialize(),
     dataType: 'json',
     success: function (res) {
       if (res.status === 'success') {
-        $('#messageBox').html(`<div class="alert alert-success">${res.message}</div>`);
-        $('#otpForm').hide();
-        $('#loginForm').show();
+        // redirect ke halaman sen_otp.php sambil kirim email
+        let email = $('input[name="email"]').val();
+        window.location.href = "send_otp.php?email=" + encodeURIComponent(email);
       } else {
-        $('#messageBox').html(`<div class="alert">${res.message}</div>`);
+        $('#messageBox').html('<div class="alert">' + res.message + '</div>');
       }
     },
-    error: function (xhr) {
-      let res = xhr.responseJSON;
-      if (res && res.message) {
-        $('#messageBox').html(`<div class="alert">${res.message}</div>`);
-      } else {
-        $('#messageBox').html('<div class="alert">Terjadi kesalahan saat verifikasi OTP.</div>');
-      }
+    error: function(xhr, status, error) {
+      console.log("Error:", error);
+      $('#messageBox').html('<div class="alert">Terjadi kesalahan server.</div>');
     }
   });
 });
-let cooldown = 60; // cooldown 60 detik
-  let timer;
 
-  function resendOTP(event) {
-    event.preventDefault();
 
-    // Disable link
-    document.getElementById("resend-link").style.display = "none";
-    document.getElementById("cooldown-text").style.display = "inline";
+  document.getElementById("password").addEventListener("keyup", function () {
+    const password = this.value;
 
-    let remaining = cooldown;
-    document.getElementById("cooldown-text").innerText = `Coba lagi dalam ${remaining}s`;
+    // rules
+    document.getElementById("rule-length").style.color = password.length >= 8 ? "lightgreen" : "red";
+    document.getElementById("rule-length").innerHTML = (password.length >= 8 ? "✅" : "❌") + " Minimal 8 karakter";
 
-    timer = setInterval(() => {
-      remaining--;
-      if (remaining > 0) {
-        document.getElementById("cooldown-text").innerText = `Coba lagi dalam ${remaining}s`;
-      } else {
-        clearInterval(timer);
-        document.getElementById("resend-link").style.display = "inline";
-        document.getElementById("cooldown-text").style.display = "none";
-      }
-    }, 1000);
+    document.getElementById("rule-lower").style.color = /[a-z]/.test(password) ? "lightgreen" : "red";
+    document.getElementById("rule-lower").innerHTML = (/[a-z]/.test(password) ? "✅" : "❌") + " Minimal 1 huruf kecil";
 
-    fetch("controller/conn_resend_otp.php", { method: "POST" })
-  .then(res => res.json())
-  .then(data => {
-    if (data.status === "success") {
-      alert(data.message);
+    document.getElementById("rule-upper").style.color = /[A-Z]/.test(password) ? "lightgreen" : "red";
+    document.getElementById("rule-upper").innerHTML = (/[A-Z]/.test(password) ? "✅" : "❌") + " Minimal 1 huruf besar";
+
+    document.getElementById("rule-number").style.color = /\d/.test(password) ? "lightgreen" : "red";
+    document.getElementById("rule-number").innerHTML = (/\d/.test(password) ? "✅" : "❌") + " Minimal 1 angka";
+
+    document.getElementById("rule-special").style.color = /[^a-zA-Z0-9]/.test(password) ? "lightgreen" : "red";
+    document.getElementById("rule-special").innerHTML = (/[^a-zA-Z0-9]/.test(password) ? "✅" : "❌") + " Minimal 1 karakter spesial (!@#$%^&*)";
+});
+
+// cek confirm password
+document.getElementById("confirm_password").addEventListener("keyup", function () {
+    const password = document.getElementById("password").value;
+    const confirm = this.value;
+    const message = document.getElementById("match-message");
+
+    if (confirm.length > 0) {
+        if (password === confirm) {
+            message.style.color = "lightgreen";
+            message.innerHTML = "✅ Password cocok";
+            message.style.display = "block";
+        } else {
+            message.style.color = "red";
+            message.innerHTML = "❌ Password tidak cocok";
+            message.style.display = "block";
+        }
     } else {
-      alert("Error: " + data.message);
+        message.style.display = "none";
     }
-  })
-  .catch(err => console.error(err));
-  }
+});
   </script>
 </body>
 </html>

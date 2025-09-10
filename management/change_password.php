@@ -106,15 +106,28 @@ if($_SESSION['status'] =="xx"){
             <!--Forget Form-->
             <form id="loginForm" action="controller/conn_change_password.php" method="post" style="margin-top: 10px;">
             <input type="hidden" name="token" value="<?php echo htmlspecialchars($_GET['token'] ?? '', ENT_QUOTES); ?>">
+<div class="input-group mb-3">
+                <input type="password" class="form-control" id="password" 
+                  placeholder="Password" name="password" 
+                  required>
+              </div>
+              <div id="password-rules" style="font-size: 13px; color: white; margin-bottom: 10px;">
+                <p id="rule-length" style="color:red;">❌ Minimal 8 karakter</p>
+                <p id="rule-lower" style="color:red;">❌ Minimal 1 huruf kecil</p>
+                <p id="rule-upper" style="color:red;">❌ Minimal 1 huruf besar</p>
+                <p id="rule-number" style="color:red;">❌ Minimal 1 angka</p>
+                <p id="rule-special" style="color:red;">❌ Minimal 1 karakter spesial (!@#$%^&*)</p>
+              </div>
+
               <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Password" name="password" required>
+                <input type="password" class="form-control" id="confirm_password" 
+                  placeholder="Confirm Password" name="confirm_password" required>
               </div>
-                <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" required>
-              </div>
+              <p id="match-message" style="font-size:13px; color:red; display:none;">❌ Password tidak cocok</p>
+              
               <div class="row">
                 <div class="col-12">
-                  <button type="submit" class="btn btn-primary btn-block" style="margin-top: 20px;">Change Password</button>
+                <button type="submit" class="btn btn-primary btn-block" style="margin-top: 20px;">Change Password</button>
                 </div>
               </div>
             </form> 
@@ -130,6 +143,46 @@ if($_SESSION['status'] =="xx"){
   <script src="dist/js/adminlte.min.js"></script>
 
   <script>
+    document.getElementById("password").addEventListener("keyup", function () {
+    const password = this.value;
+
+    // rules
+    document.getElementById("rule-length").style.color = password.length >= 8 ? "lightgreen" : "red";
+    document.getElementById("rule-length").innerHTML = (password.length >= 8 ? "✅" : "❌") + " Minimal 8 karakter";
+
+    document.getElementById("rule-lower").style.color = /[a-z]/.test(password) ? "lightgreen" : "red";
+    document.getElementById("rule-lower").innerHTML = (/[a-z]/.test(password) ? "✅" : "❌") + " Minimal 1 huruf kecil";
+
+    document.getElementById("rule-upper").style.color = /[A-Z]/.test(password) ? "lightgreen" : "red";
+    document.getElementById("rule-upper").innerHTML = (/[A-Z]/.test(password) ? "✅" : "❌") + " Minimal 1 huruf besar";
+
+    document.getElementById("rule-number").style.color = /\d/.test(password) ? "lightgreen" : "red";
+    document.getElementById("rule-number").innerHTML = (/\d/.test(password) ? "✅" : "❌") + " Minimal 1 angka";
+
+    document.getElementById("rule-special").style.color = /[^a-zA-Z0-9]/.test(password) ? "lightgreen" : "red";
+    document.getElementById("rule-special").innerHTML = (/[^a-zA-Z0-9]/.test(password) ? "✅" : "❌") + " Minimal 1 karakter spesial (!@#$%^&*)";
+});
+
+// cek confirm password
+document.getElementById("confirm_password").addEventListener("keyup", function () {
+    const password = document.getElementById("password").value;
+    const confirm = this.value;
+    const message = document.getElementById("match-message");
+
+    if (confirm.length > 0) {
+        if (password === confirm) {
+            message.style.color = "lightgreen";
+            message.innerHTML = "✅ Password cocok";
+            message.style.display = "block";
+        } else {
+            message.style.color = "red";
+            message.innerHTML = "❌ Password tidak cocok";
+            message.style.display = "block";
+        }
+    } else {
+        message.style.display = "none";
+    }
+});
   </script>
 </body>
 </html>

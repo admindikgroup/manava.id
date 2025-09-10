@@ -1,5 +1,8 @@
-# Jangan commit secret
+# Ignore environment config
+.env
+
 management/callback.php
+management/controller/conn_googleoauth.php
 management/view/ajax/chat_api*.php
 management/view/ajax/*debug*.json
 management/view/ajax/error_log
