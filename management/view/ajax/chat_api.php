@@ -1,10 +1,15 @@
 <?php
+require __DIR__ . '/../../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../..');
+$dotenv->load();
+
 header("Content-Type: application/json");
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $apiKey = getenv('API_KEY');
-    $replicateToken = getenv('REPLICATE_API_TOKEN');
+    $apiKey = $_ENV['API_KEY'];
+    $replicateToken = $_ENV['REPLICATE_API_TOKEN'];
 
     $inputData = json_decode(file_get_contents("php://input"), true);
     $prompt = $inputData['prompt'] ?? '';

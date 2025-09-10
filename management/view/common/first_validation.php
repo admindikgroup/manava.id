@@ -1,9 +1,11 @@
 <?php
+require __DIR__ . '/../../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../..');
+$dotenv->load();
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-?>
-<?php 
-// Mengaktifkan session
 session_start();
 
 include "controller/conn.php";
