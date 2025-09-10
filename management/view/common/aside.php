@@ -209,7 +209,7 @@
         }
 
         body{
-            overflow-x-x: hidden;
+            overflow-x: hidden;
         }
 
         .img-circle{

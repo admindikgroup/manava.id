@@ -50,12 +50,16 @@
             overflow-x: auto;
         }
 
+        .wrapper{
+            overflow-x: hidden;
+        }
+
         hr{
             border-top: 1px solid rgb(0 0 0 / 40%);
         }
 
         .user .image-wrapper{
-            margin : 5px 0 -95px 0 ;
+            margin : 5px 0 -70px 0 ;
         }
 
         .download-btn {
@@ -98,11 +102,7 @@
             height: 30px !important;
         }
 
-        .setting-list label {
-            font-size: 13px;
-            margin-top: 6px;
-            margin-bottom: 2px;
-        }
+
 
         .table td, .table th{
           padding: 0.5rem;
@@ -138,14 +138,13 @@
             position: relative;
             display: flex;
             width: fit-content;
-            margin: -20px 0 -50px 0;
             border-radius: 8px;
-            min-height: 50px;
+            min-height: 300px;
         }
 
         .image-wrapper img {
             display: block;
-            max-width: 300px !important;
+            max-width: 400px !important;
             border-radius: 8px;
             transition: opacity 0.5s ease;
         }
@@ -171,59 +170,52 @@
             opacity: 0;
         }
 
+        .copy-btn {
+            margin-left: auto;
+        }
+        .code-block-wrapper {
+            border: 1px solid #333;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 1em 0;
+            background: #1e1e1e;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .code-block-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 12px;
+            background: #2d2d2d;
+            font-family: monospace;
+            font-size: 0.85em;
+            color: #d4d4d4;
+            border-bottom: 1px solid #444;
+        }
 
 
+        .copy-btn {
+            background: none;
+            color: #ccc;
+            border: none;
+            font-size: 0.8em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 6px;
+        }
 
-
-
-
-
-.copy-btn {
-    margin-left: auto;
-}
-.code-block-wrapper {
-    border: 1px solid #333;
-    border-radius: 6px;
-    overflow: hidden;
-    margin: 1em 0;
-    background: #1e1e1e;
-    display: flex;
-    flex-direction: column;
-}
-
-.code-block-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 12px;
-    background: #2d2d2d;
-    font-family: monospace;
-    font-size: 0.85em;
-    color: #d4d4d4;
-    border-bottom: 1px solid #444;
-}
-
-
-.copy-btn {
-    background: none;
-    color: #ccc;
-    border: none;
-    font-size: 0.8em;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 2px 6px;
-}
-
-.copy-btn:hover {
-    color: white;
-}
+        .copy-btn:hover {
+            color: white;
+        }
 
 
 
     #chat-box {
-        max-height: 525px;
+        max-height: 65vh;
         overflow-y: auto;
         padding: 10px;
         display: flex;
@@ -249,115 +241,30 @@
 
 
     .ai {
-        background-color: #f1f1f1;
         color: black;
         align-self: flex-start;
+        margin-left: 12%;
+        margin-bottom: 50px;
+        margin-top: 50px;
     }
 
-    .chat-sidebar {
-        width: 250px;
-        transition: width 0.3s ease-in-out;
-    }
 
-    .chat-sidebar.collapsed {
-        width: 50px;
-    }
 
-    .chat-sidebar .search-bar,
-    .chat-sidebar .chat-list,
-    .chat-sidebar .setting-list,
-    .chat-sidebar #new-chat {
-        transition: margin-left 0.3s ease-in-out 0.3s, opacity 0.3s ease-in-out 0.3s;
-    }
-
-    .chat-sidebar.collapsed .search-bar,
-    .chat-sidebar.collapsed .chat-list,
-    .chat-sidebar.collapsed .setting-list,
-    .chat-sidebar.collapsed #new-chat {
-        margin-left: -90%;
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    .chat-list {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        background: #f8f9fa;
-        height: 235px;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-    .setting-list {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        background: #f8f9fa;
-        height: 235px;
-        overflow-x: hidden;
-    }
-    .chat-list-item {
-        padding: 8px;
-        border-bottom: 1px solid #ddd;
-        cursor: pointer;
-        width: 220px;
-    }
-    .chat-list-item:hover {
-        background-color: #e9ecef;
-    }
-    .search-bar{
-        width: 80%;
-    }
     #toggle-sidebar {
         flex-shrink: 0;
         flex-basis: 40px; /* Ukuran tetap */
         min-width: 40px;
         text-align: center;
     }
-    #new-chat {
-        width: 250px;
-    }
-    .new-chat-list{
-        overflow: hidden;
-    }
+
     #prompt {
         height: 40px; /* Set tinggi awal */
         min-height: 40px;
         max-height: 120px; /* Maksimal 4 baris sebelum muncul scrollbar */
         overflow-y: auto;
         resize: none; /* Mencegah resize manual */
-        line-height: 20px; /* Menyesuaikan agar 4 baris tetap di 120px */
     }
 
-    .chat-list-item.active-chat {
-        background: rgba(0, 123, 255, 0.1); /* Biru muda transparan */
-        border-left: 4px solid #007bff; /* Garis di kiri untuk penanda */
-        border-radius: 5px;
-        transition: background 0.2s ease-in-out;
-    }
-
-    @media (max-width: 700px) {
-        #chat-box, #chat-form {
-            transition: opacity 0.3s ease-in-out;
-            display: none; /* Sembunyikan dari awal untuk mencegah kedipan */
-        }
-        .chat-bubble{
-            max-width: 100%;
-            margin-bottom: 20px;
-        }
-        .ai{
-            margin-right: 50px;
-        }
-        .user{
-            margin-left: 50px;
-        }
-        .image-wrapper img {
-            max-width: 100px !important;
-        }
-        .image-wrapper{
-            min-height: auto !important;
-        }
-    }
 
     #preview-image-container img {
         max-width: 200px;
@@ -366,9 +273,8 @@
     }
 
     .card-body {
-        overflow: hidden;
         flex-wrap: wrap; /* agar jika terlalu sempit, bisa membungkus konten */
-        }
+    }
 
 
 
@@ -384,15 +290,191 @@
         height: 1.5rem;
     }
 
+
+
+
+
+    .chat-sidebar {
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid #ddd;
+        padding: 10px;
+    }
+
+    .chat-sidebar-header {
+        flex-shrink: 0;             /* tetap di atas */
+        margin-bottom: 15px;
+    }
+
+    .chat-list {
+        flex: 1;                    /* isi full ke bawah */
+        overflow-y: auto;           /* scroll kalau banyak chat */
+        margin-top: 10px;
+        padding: 0;                 /* hilangkan padding default */
+        border: none;               /* hilangkan border */
+        background: none;           /* hilangkan background */
+    }
+
+    .chat-list-item {
+        padding: 8px 5px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .chat-list-item:hover {
+        background-color: #c0c0c07b;
+        color : #000;
+    }
+
+    .chat-list-item.active-chat {
+        background: rgba(0, 123, 255, 0.1);
+        border-left: 4px solid #007bff;
+    }
+
+    /* New Chat button simple */
+    #new-chat {
+        display: block;
+        width: 100%;
+        padding: 8px 0;
+        background: none;
+        border: none;
+        text-align: left;
+        font-weight: bold;
+        color: #333;
+        cursor: pointer;
+    }
+
+    #new-chat:hover {
+        background: #f1f1f1;
+    }
+
+    .search-bar {
+        margin-top: 5px;
+    }
+
+    .btn-light{
+        border: none !important;
+        background: none !important;
+        color: #F1F3F6 !important;
+    }
+
+    .chat-list-item:hover .btn-light {
+        color: #000 !important;  /* ubah jadi hitam */
+    }
+
+    .chat-sidebar-content{
+        height: 65vh;
+        overflow-y: auto;
+    }
+
+    .chat-settings .card {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .chat-settings .card-header {
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+    .chat-settings .form-label {
+        color: #555;
+    }
+
+
+
+    /* --- Responsive Sidebar --- */
     @media (max-width: 768px) {
+        .chat-sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%; /* sembunyi */
+            height: 100%;
+            width: 75%;
+            max-width: 280px;
+            background: #fff;
+            z-index: 1050;
+            transition: left 0.3s ease-in-out;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+        }
+
+        .chat-sidebar.show {
+            left: 0; /* muncul */
+        }
+
+        .chat-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1040;
+        }
+        .chat-overlay.active {
+            display: block;
+        }
+
+        /* tombol toggle di hp */
+        #toggle-sidebar {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .ai{
+            margin-left: 5%;
+            margin-right: 20px;
+        }
+
+        .card-body{
+            padding: 0px;
+        }
+
+        .content-wrapper>.content{
+            padding: 0px;
+        }
+
+        #settings-body{
+            padding: 10px;
+        }
+
+        .chat-sidebar-content{
+            height: calc(100vh - 120px);
+        }
+
+        .chat-bubble{
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+ 
+        .user{
+            margin-left: 50px;
+        }
+
+        .image-wrapper img {
+            max-width: 250px !important;
+        }
+
+        .image-wrapper{
+            min-height: 200px;
+        }
+
+        h3{
+            font-size: 1.2rem;
+        }
+
         #aiModalImage {
-        max-height: 70vh;
+            max-height: 70vh;
+        }
+    }
+
+    @media (min-width: 769px) {
+        #toggle-sidebar {
+            display: none; /* desktop tidak perlu */
         }
     }
 
 </style>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
     <div class="wrapper">
         <?php include "./view/common/navbar.php" ?>
         <?php include "./view/common/aside.php" ?>
@@ -433,59 +515,42 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <div class="card mt-2">
-                                <div class="card-header bg-primary d-flex justify-content-between align-items-center">
-                                    <h3 class="card-title">Chat with AI</h3>
+                            <div class=" mt-2">
+                                <div class="card-body d-flex row">
                                     <input type="hidden" id="chat-title-ai" class="chat-title-ai" data-id="">
-                                </div>
-                                <div class="card-body d-flex">
-                                    <div class="chat-sidebar" id="chat-sidebar">
-                                        <div class="d-flex">
-                                            <input type="text" class="search-bar form-control" placeholder="Search title chat...">
-                                            <button class="btn btn-primary btn-sm ml-2" id="toggle-sidebar"><i class="fas fa-compress-alt"></i></button>
+                                   
+                                   
+                                   
+                                    <div class="chat-sidebar col-xl-2 col-lg-3 col-md-3 col-sm-12 col-12" id="chat-sidebar">
+                                        <!-- HEADER (tetap di atas, tidak scroll) -->
+                                        <div class="chat-sidebar-header">
+                                            <button id="new-chat"><i class="fas fa-plus"></i> New Chat</button>
+                                            <input class="search-bar form-control" type="text" placeholder="Search title chat...">
                                         </div>
-                                        <div class="chat-list mt-2">
-                                        </div>
-                                        <div class="setting-list mt-2">
-                                            <div style="width: 220px;">
-                                                <h5>Setting Images Output</h5>
-                                                <label for="type_ai" class="form-label">Image AI Type</label>
-                                                <select id="type_ai" class="form-select select2">
-                                                    <option value="free" selected>Free (Pollinations)</option>
-                                                    <option value="diffusion">Diffusion (Illustration)</option>
-                                                    <option value="black-forest">Black Forest (Realistic)</option>
-                                                    <option value="kling">Kling (Video Generator)</option>
-                                                </select>
 
-                                                <label for="upscale" class="form-label mt-2">Upscale</label>
-                                                <select id="upscale" class="form-select select2">
-                                                    <option value="default" selected>Default</option>
-                                                    <option value="2">2x</option>
-                                                    <option value="4">4x</option>
-                                                </select>
-
-                                                <label for="aspect_ratio" class="form-label mt-2">Aspect Ratio</label>
-                                                <select id="aspect_ratio" class="form-select select2">
-                                                    <option value="1:1" selected>1:1 (Square)</option>
-                                                    <option value="16:9">16:9 (Wide)</option>
-                                                    <option value="4:5">4:5 (Instagram)</option>
-                                                    <option value="9:16">9:16 (Portrait)</option>
-                                                    <option value="3:4">3:4</option>
-                                                    <option value="4:3">4:3</option>
-                                                    <option value="2:3">2:3</option>
-                                                    <option value="3:2">3:2</option>
-                                                </select>
+                                        <!-- CONTENT (scrollable) -->
+                                        <div class="chat-sidebar-content">
+                                            <div class="chat-list mt-2">
+                                                <!-- isi chat list -->
                                             </div>
-                                        </div>
-                                        <div class="new-chat-list">
-                                            <button class="btn btn-primary mt-3" id="new-chat"><i class="fas fa-plus"></i> New Chat</button>
-                                        </div>
+                                        </div> 
                                     </div>
 
-                                    <div class="flex-grow-1 ml-3 d-flex flex-column" style="width: 75%; height: 585px;">
 
 
-                                        <!-- Drag & Drop Area, awalnya hidden -->
+
+                                    <div class="flex-grow-1 d-flex flex-column col-xl-10 col-lg-9 col-md-9 col-sm-12 col-12">
+
+                                        <!-- Overlay untuk menutup sidebar -->
+                                        <div class="chat-overlay" id="chat-overlay"></div>
+
+                                        
+                                        <!-- Tombol toggle muncul hanya di HP -->
+                                        <button style="width:25%;" id="toggle-sidebar" class="card shadow-sm border-0">
+                                            <i class="fas fa-bars"></i> Chats
+                                        </button>
+
+                                        <!-- Drag & Drop Area -->
                                         <div id="drop-area" class="p-2 text-center" 
                                             style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.8); border: 2px dashed #28a745; border-radius: 5px; color: #333; font-size: 16px; z-index: 10; align-items: center; justify-content: center;">
                                             Drop your file here!
@@ -504,14 +569,14 @@
                                             <!-- INPUT GROUP -->
                                             <div class="input-group mb-2">
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fas fa-paperclip"></i>
+                                                    <button style="background: #FFFFFF; border-right: none; border-radius: 5px 0px 0px 5px;" type="button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                       <i class="fas fa-plus"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item attach-option" href="#" data-type="image">📷 Image</a>
-                                                        <a class="dropdown-item attach-option" href="#" data-type="video">🎬 Video</a>
-                                                        <a class="dropdown-item attach-option" href="#" data-type="document">📄 Document</a>
-                                                        <a class="dropdown-item attach-option" href="#" data-type="audio">🎵 Audio</a>
+                                                        <a class="dropdown-item attach-option" href="#" data-type="image"><i style="width: 25px;" class="far fa-images mr-2"></i>Images</a>
+                                                        <a class="dropdown-item attach-option" href="#" data-type="video"><i style="width: 25px;" class="fas fa-video mr-2"></i>Video</a>
+                                                        <a class="dropdown-item attach-option" href="#" data-type="document"><i style="width: 25px;" class="fas fa-file-invoice mr-2"></i>Document</a>
+                                                        <a class="dropdown-item attach-option" href="#" data-type="audio"><i style="width: 25px;" class="fas fa-music mr-2"></i>Audio</a>
                                                     </div>
                                                 </div>
 
@@ -520,10 +585,10 @@
                                                 <input type="file" id="file-input" style="display: none;" multiple>
 
 
-                                                <textarea id="prompt" class="form-control" placeholder="Type your prompt..." rows="2"></textarea>
+                                                <textarea style="border-left: none;" id="prompt" class="form-control" placeholder="Type your prompt..." rows="2"></textarea>
 
                                                 <div class="input-group-append">
-                                                    <button type="submit" class="btn btn-success">Send</button>
+                                                    <button style="border-radius: 0px 5px 5px 0px;" type="submit" class="btn btn-success">Send</button>
                                                 </div>
                                             </div>
 
@@ -531,9 +596,62 @@
                                         </form>
 
 
+                                        <!-- SETTINGS WRAPPER -->
+                                        <div class="chat-settings mt-3">
+                                            <div class="card shadow-sm border-0">
+                                                <div class="card-header d-flex align-items-center justify-content-between bg-light" type="button" data-toggle="collapse" data-target="#settings-body">
+                                                    <h6 class="mb-0">
+                                                        <i class="fas fa-cog me-2 text-secondary mr-1"></i> Image / Video Output Settings
+                                                    </h6>
+                                                </div>
+
+                                                <div id="settings-body" class="collapse">
+                                                    <div class="card-body">
+                                                        <div class="row g-3">
+                                                            <!-- IMAGE AI TYPE -->
+                                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                                <label for="type_ai" class="form-label small fw-bold">Image / Video AI Type</label>
+                                                                <select id="type_ai" class="form-select select2">
+                                                                    <option value="free" selected>Free (Pollinations)</option>
+                                                                    <option value="diffusion">Diffusion (Illustration)</option>
+                                                                    <option value="black-forest">Black Forest (Realistic)</option>
+                                                                    <option value="kling">Kling (Video Generator)</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <!-- UPSCALE -->
+                                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                                <label for="upscale" class="form-label small fw-bold">Upscale</label>
+                                                                <select id="upscale" class="form-select select2">
+                                                                    <option value="default" selected>Default</option>
+                                                                    <option value="2">2x</option>
+                                                                    <option value="4">4x</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <!-- ASPECT RATIO -->
+                                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                                <label for="aspect_ratio" class="form-label small fw-bold">Aspect Ratio</label>
+                                                                <select id="aspect_ratio" class="form-select select2">
+                                                                    <option value="1:1" selected>1:1 (Square)</option>
+                                                                    <option value="16:9">16:9 (Wide)</option>
+                                                                    <option value="4:5">4:5 (Instagram)</option>
+                                                                    <option value="9:16">9:16 (Portrait)</option>
+                                                                    <option value="3:4">3:4</option>
+                                                                    <option value="4:3">4:3</option>
+                                                                    <option value="2:3">2:3</option>
+                                                                    <option value="3:2">3:2</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
@@ -621,6 +739,19 @@
     
 
     <script>
+
+    $(document).ready(function(){
+        $("#toggle-sidebar").on("click", function(){
+            $("#chat-sidebar").addClass("show");
+            $("#chat-overlay").addClass("active");
+        });
+
+        $("#chat-overlay").on("click", function(){
+            $("#chat-sidebar").removeClass("show");
+            $(this).removeClass("active");
+        });
+    });
+
 
     $(document).ready(function () {
         // Event untuk image preview modal
@@ -801,10 +932,7 @@
                 const icon = document.createElement("div");
                 icon.className = "bg-light p-2 border rounded text-truncate";
                 icon.style.height = "120px";
-                icon.innerHTML = `
-                    <i class="fas fa-file-alt fa-2x me-2 text-secondary"></i>
-                    <div><strong>${file.name}</strong><br><small>${(file.size / 1024).toFixed(1)} KB</small></div>
-                `;
+                icon.innerHTML = `<i class="fas fa-file-alt fa-2x me-2 text-secondary"></i><div><strong>${file.name}</strong><br><small>${(file.size / 1024).toFixed(1)} KB</small></div>`;
                 wrapper.appendChild(icon);
                 wrapper.appendChild(removeBtn);
                 previewContainer.appendChild(wrapper);
@@ -882,6 +1010,7 @@
         $(document).ready(function () {
             $('#type_ai').on('change', function () {
                 const isFree = $(this).val() === 'free';
+                const isVideo = $(this).val() === 'kling';
 
                 $('#upscale option').prop('disabled', false);
                 $('#aspect_ratio option').prop('disabled', false);
@@ -901,6 +1030,28 @@
 
                     $('#upscale').val('default').trigger('change');
                     $('#aspect_ratio').val('1:1').trigger('change');
+                }
+
+                if (isVideo) {
+                    // Batasi upscale ke default saja
+                    $('#upscale option').each(function () {
+                        if ($(this).val() !== 'default') {
+                            $(this).prop('disabled', true);
+                        }
+                    });
+                    $('#upscale').val('default').trigger('change');
+
+                    // Batasi aspect ratio hanya ke 1:1, 16:9, 9:16
+                    $('#aspect_ratio option').each(function () {
+                        if (!['1:1', '16:9', '9:16'].includes($(this).val())) {
+                            $(this).prop('disabled', true);
+                        }
+                    });
+
+                    // Kalau value sekarang tidak sesuai, pakai default 1:1
+                    if (!['1:1', '16:9', '9:16'].includes($('#aspect_ratio').val())) {
+                        $('#aspect_ratio').val('1:1').trigger('change');
+                    }
                 }
 
                 $('#upscale').trigger('change.select2');
@@ -1212,8 +1363,7 @@
                                             const style = escapeHtml(node.getAttribute('style') || '');
 
                                             // Tambahkan event onload untuk menghapus loading
-                                            const imgHtml = `
-                                                <div class="image-wrapper" >
+                                            const imgHtml = `<div class="image-wrapper" >
                                                     <img src="img/loading.gif" class="image-loading" alt="Loading..." 
                                                         style="position: absolute; top: 0; left: 0; width: 100%; height: auto; transition: opacity 0.5s ease;" />
                                                     
@@ -1228,8 +1378,7 @@
                                                         "
                                                     />
                                                     <a href="${src}" download class="download-btn" title="Download"><i class="fas fa-download"></i></a>
-                                                </div><br>
-                                            `;
+                                                </div><br>`;
 
 
 
@@ -1242,15 +1391,13 @@
 
                                             const style = escapeHtml(node.getAttribute('style') || 'max-width: 100%; margin-bottom: 10px;');
 
-                                            const videoHtml = `
-                                                <div class="image-wrapper" style="position: relative;">
+                                            const videoHtml = `<div class="image-wrapper" style="position: relative;">
                                                     <video controls style="${style}">
                                                         <source src="${src}" type="video/mp4" />
                                                         Your browser does not support the video tag.
                                                     </video>
                                                     <a href="${src}" download class="download-btn" title="Download Video"><i class="fas fa-download"></i></a>
-                                                </div><br>
-                                            `;
+                                                </div><br>`;
 
                                             return videoHtml;
                                         }
@@ -1351,11 +1498,95 @@
                                 }),
 
                                 success: function (response) {
-                                    console.log("activeChatId", activeChatId);
-                                    
-                                    typingIndicator.remove();
-                                    console.log("AI Response RAW:", response); // Debugging
+                                    console.log("AI Response RAW:", response);
 
+                                    if (response.status === "starting" && response.prediction_id && aiType == 'kling') {
+                                        console.log("⏳ Video generation in progress. Start polling...");
+
+                                        // ✅ Tampilkan dulu respon teks
+                                        if (response.response) {
+                                            // ✅ Pakai efek ngetik biar konsisten dan hapus "AI is thinking"
+                                            const aiBubble = $('<div class="chat-bubble ai"></div>');
+                                            $("#chat-box").append(aiBubble);
+
+                                            // Typing efek dari string response.response
+                                            let queue = [];
+                                            const rawTokens = response.response.match(/<[^>]+>|[^<]+/g) || [];
+
+                                            rawTokens.forEach(token => {
+                                                if (token.match(/^<[^>]+>$/)) {
+                                                    queue.push(token);
+                                                } else {
+                                                    token.split('').forEach(char => queue.push(char));
+                                                }
+                                            });
+
+                                            let charsPerTick = 3;
+                                            let typingEffect = setInterval(function () {
+                                                for (let i = 0; i < charsPerTick && queue.length > 0; i++) {
+                                                    let current = queue.shift();
+                                                    if (current.match(/^<[^>]+>$/i)) {
+                                                        aiBubble.append(current);
+                                                    } else {
+                                                        aiBubble.append(current);
+                                                    }
+                                                }
+
+                                                if (queue.length === 0) {
+                                                    clearInterval(typingEffect);
+                                                    refreshChatFromServer(); // optional
+                                                }
+
+                                                $("#chat-box").scrollTop($("#chat-box")[0].scrollHeight);
+                                            }, 10);
+
+                                            // ✅ Simpan narasi awal ke DB
+                                            $.ajax({
+                                                url: "view/ajax/save_chat.php",
+                                                type: "POST",
+                                                contentType: "application/json",
+                                                data: JSON.stringify({
+                                                    id_dg_chat_ai_title: activeChatId,
+                                                    status_chat: 2, // 2 = AI
+                                                    chat_detail: response.response
+                                                }),
+                                                success: function () {
+                                                    loadChatList();
+                                                }
+                                            });
+                                        }
+
+                                        pollStatus(response.prediction_id, activeChatId, function(videoUrl) {
+                                            // 1. Simpan ke server
+                                            $.ajax({
+                                                url: "view/ajax/save_video_from_url.php",
+                                                type: "POST",
+                                                contentType: "application/json",
+                                                data: JSON.stringify({
+                                                    video_url: videoUrl,
+                                                    id_user: <?php echo $id_user; ?>,
+                                                    id_dg_chat_ai_title: activeChatId
+                                                }),
+                                                success: function(saveResp) {
+                                                    if (saveResp.status === "saved" && saveResp.local_url) {
+                                                        const videoTag = `<video style="max-width: 300px;" controls>
+                                                                <source src="${saveResp.local_url}" type="video/mp4">
+                                                                Your browser does not support the video tag.
+                                                            </video>`;
+
+                                                        saveAndDisplayAiResponse(videoTag, activeChatId);
+                                                    } else {
+                                                        console.warn("⚠️ Video failed to save:", saveResp);
+                                                    }
+                                                }
+                                            });
+                                        });
+
+
+                                        return; // Stop lanjutkan proses normal
+                                    }
+
+                                    // Proses AI response biasa (non Kling)
                                     let aiResponse = response && response.response ? response.response : "";
 
                                     // Decode HTML entities (seperti &lt; menjadi <)
@@ -1647,6 +1878,56 @@
                 });
             });
 
+            function pollStatus(predictionId, activeChatId, callback) {
+                const interval = setInterval(() => {
+                    fetch('view/ajax/chat_api_check_status.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ prediction_id: predictionId })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.status === 'succeeded') {
+                            clearInterval(interval);
+                            callback(data.output); // kirim ke callback bersama activeChatId
+                        } else if (data.status === 'failed') {
+                            clearInterval(interval);
+                            alert("Gagal generate video");
+                        }
+                    })
+                    .catch(err => {
+                        clearInterval(interval);
+                        console.error("Polling error:", err);
+                    });
+                }, 5000); // tiap 5 detik
+            }
+
+
+            function saveAndDisplayAiResponse(aiResponse, activeChatId) {
+                // Simpan ke database
+                $.ajax({
+                    url: "view/ajax/save_chat.php",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        id_dg_chat_ai_title: activeChatId,
+                        status_chat: 2,
+                        chat_detail: aiResponse
+                    }),
+                    success: function () {
+                        loadChatList();
+
+                        // Tampilkan di UI
+                        let aiBubble = $('<div class="chat-bubble ai"></div>');
+                        aiBubble.html(aiResponse);
+                        $("#chat-box").append(aiBubble);
+                        $("#chat-box").scrollTop($("#chat-box")[0].scrollHeight);
+                    }
+                });
+            }
+
+
+
             function refreshChatFromServer() {
                 let chatId = $(".chat-title-ai").val(); // ✅ Update Active Chat ID
 
@@ -1713,8 +1994,7 @@
                                             const style = escapeHtml(node.getAttribute('style') || '');
 
                                             // Tambahkan event onload untuk menghapus loading
-                                            const imgHtml = `
-                                                <div class="image-wrapper" >
+                                            const imgHtml = `<div class="image-wrapper" >
                                                     <img src="img/loading.gif" class="image-loading" alt="Loading..." 
                                                         style="position: absolute; top: 0; left: 0; width: 100%; height: auto; transition: opacity 0.5s ease;" />
                                                     
@@ -1729,8 +2009,7 @@
                                                         "
                                                     />
                                                     <a href="${src}" download class="download-btn" title="Download"><i class="fas fa-download"></i></a>
-                                                </div><br>
-                                            `;
+                                                </div><br>`;
 
 
 
@@ -1744,15 +2023,13 @@
 
                                             const style = escapeHtml(node.getAttribute('style') || 'max-width: 100%; margin-bottom: 10px;');
 
-                                            const videoHtml = `
-                                                <div class="image-wrapper" style="position: relative;">
+                                            const videoHtml = `<div class="image-wrapper" style="position: relative;">
                                                     <video controls style="${style}">
                                                         <source src="${src}" type="video/mp4" />
                                                         Your browser does not support the video tag.
                                                     </video>
                                                     <a href="${src}" download class="download-btn" title="Download Video"><i class="fas fa-download"></i></a>
-                                                </div><br>
-                                            `;
+                                                </div><br>`;
 
                                             return videoHtml;
                                         }
@@ -1856,7 +2133,7 @@
                                     <div class="chat-list-item d-flex justify-content-between align-items-center" data-id="${chat.id_dg_chat_ai_title}">
                                         <span class="chat-title editable" data-id="${chat.id_dg_chat_ai_title}">${chat.title_chat}</span>
                                         <div class="dropdown">
-                                            <button class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">...</button>
+                                            <button class="btn btn-sm btn-light" data-toggle="dropdown">...</button>
                                             <div class="dropdown-menu">
                                                 <button class="dropdown-item rename-chat" data-id="${chat.id_dg_chat_ai_title}" data-title="${chat.title_chat}">Rename</button>
                                                 <button class="dropdown-item delete-chat" data-id="${chat.id_dg_chat_ai_title}">Delete</button>
@@ -2043,16 +2320,6 @@
 
         });
 
-        $(document).ready(function () {
-            // Cek apakah tampilan di HP saat pertama kali load
-            if (window.innerWidth <= 700) {
-                if ($("#chat-sidebar").hasClass("collapsed")) {
-                    $("#chat-box, #chat-form").fadeIn(300); // Animasi muncul lebih smooth
-                } else {
-                    $("#chat-box, #chat-form").hide(); // Tetap tersembunyi jika sidebar terbuka
-                }
-            }
-        });
 
         // Handle Toggle Sidebar
         $("#toggle-sidebar").click(function () {
@@ -2060,14 +2327,6 @@
             let icon = $("#chat-sidebar").hasClass("collapsed") ? "fa-expand-alt" : "fa-compress-alt";
             $(this).html('<i class="fas ' + icon + '"></i>');
 
-            // Jika layar HP, tampilkan atau sembunyikan chat
-            if (window.innerWidth <= 700) {
-                if ($("#chat-sidebar").hasClass("collapsed")) {
-                    $("#chat-box, #chat-form").fadeIn(300); // Smooth muncul
-                } else {
-                    $("#chat-box, #chat-form").fadeOut(300); // Smooth hilang
-                }
-            }
         });
 
 
