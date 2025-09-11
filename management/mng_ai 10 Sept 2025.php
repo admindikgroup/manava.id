@@ -135,22 +135,23 @@
 
 
         .image-wrapper {
-            width: 350PX;
             position: relative;
             display: flex;
+            width: fit-content;
             border-radius: 8px;
+            min-height: 300px;
         }
 
         .image-wrapper img {
-            width: 350PX;
             display: block;
+            max-width: 400px !important;
             border-radius: 8px;
             transition: opacity 0.5s ease;
         }
 
         .image-wrapper video {
-            width: 350PX;
             display: block;
+            max-width: 300px !important;
             border-radius: 8px;
             transition: opacity 0.5s ease;
         }
@@ -161,11 +162,6 @@
             top: 0;
             left: 0;
             z-index: 1;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading-margin{
-            height: 250px;
         }
 
         .fade-in-image {
@@ -241,7 +237,6 @@
         background-color: #007bff;
         color: white;
         align-self: flex-end;
-        max-width: 50%;
     }
 
 
@@ -452,19 +447,14 @@
  
         .user{
             margin-left: 50px;
-            max-width: 75%;
         }
-        
+
+        .image-wrapper img {
+            max-width: 250px !important;
+        }
+
         .image-wrapper{
-            width: 200PX;
-        }
-
-        .image-wrapper img{
-            width: 200PX;
-        }
-
-        .image-wrapper video{
-            width: 200PX;
+            min-height: 200px;
         }
 
         h3{
@@ -1262,9 +1252,9 @@
                         const fileTags = successfulUploads.map(path => {
                         const ext = path.split('.').pop().toLowerCase();
                         if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext)) {
-                            return `<img src="${path}" style="margin-bottom: 10px;" />`;
+                            return `<img src="${path}" style="max-width: 100%; margin-bottom: 10px;" />`;
                         } else if (['mp4', 'webm'].includes(ext)) {
-                            return `<video controls style="margin-bottom: 10px;"><source src="${path}" type="video/${ext}"></video>`;
+                            return `<video controls style="max-width: 100%; margin-bottom: 10px;"><source src="${path}" type="video/${ext}"></video>`;
                         } else if (['mp3', 'ogg', 'wav'].includes(ext)) {
                             return `<audio controls style="width: 100%; margin-bottom: 10px;"><source src="${path}" type="audio/${ext}"></audio>`;
                         } else {
@@ -1374,26 +1364,19 @@
 
                                             // Tambahkan event onload untuk menghapus loading
                                             const imgHtml = `<div class="image-wrapper" >
-                                                    <img src="img/loading.gif" class="image-loading" alt="Loading..."/>
-                                                    <div class="loading-margin"></div>
+                                                    <img src="img/loading.gif" class="image-loading" alt="Loading..." 
+                                                        style="position: absolute; top: 0; left: 0; width: 100%; height: auto; transition: opacity 0.5s ease;" />
+                                                    
                                                     <img src="${src}" alt="${alt}" class="fade-in-image" 
                                                         style="${style}; opacity: 0; transition: opacity 0.5s ease;" 
                                                         onload="
                                                             this.style.opacity = '1';
-                                                            if (this.previousElementSibling && this.previousElementSibling.previousElementSibling) {
-                                                                // Hapus loading.gif
-                                                                let imgLoading = this.previousElementSibling.previousElementSibling;
-                                                                imgLoading.style.opacity = '0';
-                                                                setTimeout(() => imgLoading.remove(), 500);
-
-                                                                // Hapus loading-margin
-                                                                let loadingMargin = this.previousElementSibling;
-                                                                loadingMargin.style.opacity = '0';
-                                                                setTimeout(() => loadingMargin.remove(), 500);
+                                                            if (this.previousElementSibling) {
+                                                                this.previousElementSibling.style.opacity = '0';
+                                                                setTimeout(() => this.previousElementSibling.remove(), 500);
                                                             }
                                                         "
                                                     />
-
                                                     <a href="${src}" download class="download-btn" title="Download"><i class="fas fa-download"></i></a>
                                                 </div><br>`;
 
@@ -1406,9 +1389,10 @@
                                             const srcLama = escapeHtml(node.querySelector('source')?.getAttribute('src') || '');
                                             const src = srcLama.replace('storage/upload/video/', 'storage/upload/video/'); // bisa modifikasi kalau perlu
 
-                                            const style = escapeHtml(node.getAttribute('style') || 'margin-bottom: 10px;');
+                                            const style = escapeHtml(node.getAttribute('style') || 'max-width: 100%; margin-bottom: 10px;');
 
-                                            const videoHtml = `<div class="image-wrapper" style="position: relative;"><video controls style="${style}">
+                                            const videoHtml = `<div class="image-wrapper" style="position: relative;">
+                                                    <video controls style="${style}">
                                                         <source src="${src}" type="video/mp4" />
                                                         Your browser does not support the video tag.
                                                     </video>
@@ -1519,6 +1503,59 @@
                                     if (response.status === "starting" && response.prediction_id && aiType == 'kling') {
                                         console.log("⏳ Video generation in progress. Start polling...");
 
+                                        // ✅ Tampilkan dulu respon teks
+                                        if (response.response) {
+                                            // ✅ Pakai efek ngetik biar konsisten dan hapus "AI is thinking"
+                                            const aiBubble = $('<div class="chat-bubble ai"></div>');
+                                            $("#chat-box").append(aiBubble);
+
+                                            // Typing efek dari string response.response
+                                            let queue = [];
+                                            const rawTokens = response.response.match(/<[^>]+>|[^<]+/g) || [];
+
+                                            rawTokens.forEach(token => {
+                                                if (token.match(/^<[^>]+>$/)) {
+                                                    queue.push(token);
+                                                } else {
+                                                    token.split('').forEach(char => queue.push(char));
+                                                }
+                                            });
+
+                                            let charsPerTick = 3;
+                                            let typingEffect = setInterval(function () {
+                                                for (let i = 0; i < charsPerTick && queue.length > 0; i++) {
+                                                    let current = queue.shift();
+                                                    if (current.match(/^<[^>]+>$/i)) {
+                                                        aiBubble.append(current);
+                                                    } else {
+                                                        aiBubble.append(current);
+                                                    }
+                                                }
+
+                                                if (queue.length === 0) {
+                                                    clearInterval(typingEffect);
+                                                    refreshChatFromServer(); // optional
+                                                }
+
+                                                $("#chat-box").scrollTop($("#chat-box")[0].scrollHeight);
+                                            }, 10);
+
+                                            // ✅ Simpan narasi awal ke DB
+                                            $.ajax({
+                                                url: "view/ajax/save_chat.php",
+                                                type: "POST",
+                                                contentType: "application/json",
+                                                data: JSON.stringify({
+                                                    id_dg_chat_ai_title: activeChatId,
+                                                    status_chat: 2, // 2 = AI
+                                                    chat_detail: response.response
+                                                }),
+                                                success: function () {
+                                                    loadChatList();
+                                                }
+                                            });
+                                        }
+
                                         pollStatus(response.prediction_id, activeChatId, function(videoUrl) {
                                             // 1. Simpan ke server
                                             $.ajax({
@@ -1531,59 +1568,22 @@
                                                     id_dg_chat_ai_title: activeChatId
                                                 }),
                                                 success: function(saveResp) {
-                                                    console.log("Video saved status response:", saveResp.status);
-                                                    console.log("Video saved local_url response:", saveResp.local_url);
-                                                    
                                                     if (saveResp.status === "saved" && saveResp.local_url) {
-                                                        const videoTag = `<video controls>
+                                                        const videoTag = `<video style="max-width: 300px;" controls>
                                                                 <source src="${saveResp.local_url}" type="video/mp4">
                                                                 Your browser does not support the video tag.
                                                             </video>`;
 
-                                                        // Cari bubble AI terakhir (yang punya placeholder)
-                                                        let lastAiBubble = $("#chat-box .chat-bubble.ai").last();
-                                                        let currentHtml = lastAiBubble.html();
-
-                                                        let id_dg_chat_ai = lastAiBubble.data("id");
-
-                                                        console.log("Last AI Bubble ID:", id_dg_chat_ai);
-                                                        
-
-
-                                                        // Replace loader img dengan video
-                                                        let newHtml = currentHtml.replace(/<img[^>]*loading\.gif[^>]*>/, videoTag);
-
-
-                                                        console.log("Video tag inserted into chat bubble :", newHtml);
-                                                        
-
-                                                        // Update juga di database (replace text dengan video embed)
-                                                        $.ajax({
-                                                            url: "view/ajax/save_chat.php",
-                                                            type: "POST",
-                                                            contentType: "application/json",
-                                                            dataType: "json", // penting
-                                                            data: JSON.stringify({
-                                                                id_dg_chat_ai: id_dg_chat_ai,
-                                                                id_dg_chat_ai_title: activeChatId,
-                                                                status_chat: 2,
-                                                                chat_detail: newHtml
-                                                            }),
-                                                            success: function(resp) {
-                                                                console.log("Video chat detail updated in DB.", resp);
-                                                                refreshChatFromServer();
-                                                            },
-                                                            error: function(xhr, status, error) {
-                                                                console.error("Failed to update chat with video:", status, error, xhr.responseText);
-                                                            }
-                                                        });
-
+                                                        saveAndDisplayAiResponse(videoTag, activeChatId);
                                                     } else {
                                                         console.warn("⚠️ Video failed to save:", saveResp);
                                                     }
                                                 }
                                             });
                                         });
+
+
+                                        return; // Stop lanjutkan proses normal
                                     }
 
                                     // Proses AI response biasa (non Kling)
@@ -1626,10 +1626,6 @@
 
                                         return normalizedLines.join("\n");
                                     }
-
-                                    // Ganti placeholder ![MEDIA][...] dengan loader GIF
-                                    aiResponse = aiResponse.replace(/!\[MEDIA\]\[.*?\]/g, '<img src="img/loading.gif" alt="loading">');
-
 
 
                                     const containsMarkdownTable = /\|(.+?)\|/g.test(aiResponse) && !/<table[\s\S]*?>[\s\S]*?<\/table>/gi.test(aiResponse);
@@ -1763,7 +1759,7 @@
 
                                        // Ganti image markdown ![alt](link) jadi <img ...>
                                         aiResponse = aiResponse.replace(/!\[(.*?)\]\((https?:\/\/[^\s]+)\)/g, function (match, alt, url) {
-                                            return `<img src="${url}" alt="${alt}"  />`;
+                                            return `<img style="max-width: 300px;" src="${url}" alt="${alt}"  />`;
                                         });
 
                                         
@@ -1884,7 +1880,6 @@
 
             function pollStatus(predictionId, activeChatId, callback) {
                 const interval = setInterval(() => {
-                    console.log("Polling status for:", predictionId);
                     fetch('view/ajax/chat_api_check_status.php', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -1919,31 +1914,17 @@
                         status_chat: 2,
                         chat_detail: aiResponse
                     }),
-                    success: function (resp) {
-                        if (resp.success) {
-                            loadChatList();
+                    success: function () {
+                        loadChatList();
 
-                            // Ambil id dari server
-                            let chatId = resp.id_dg_chat_ai;
-
-                            // Tampilkan di UI dengan atribut id
-                            let aiBubble = $('<div class="chat-bubble ai"></div>');
-                            aiBubble.attr("data-id", chatId); // pakai data-id
-                            // atau: aiBubble.attr("id", "chat-" + chatId);
-
-                            aiBubble.html(aiResponse);
-                            $("#chat-box").append(aiBubble);
-                            $("#chat-box").scrollTop($("#chat-box")[0].scrollHeight);
-                        } else {
-                            console.error("⚠️ Gagal simpan chat:", resp.message);
-                        }
-                    },
-                    error: function () {
-                        console.error("⚠️ AJAX error saat simpan chat.");
+                        // Tampilkan di UI
+                        let aiBubble = $('<div class="chat-bubble ai"></div>');
+                        aiBubble.html(aiResponse);
+                        $("#chat-box").append(aiBubble);
+                        $("#chat-box").scrollTop($("#chat-box")[0].scrollHeight);
                     }
                 });
             }
-
 
 
 
@@ -1963,7 +1944,6 @@
                             response.data.forEach(chat => {
                                 let bubbleClass = chat.status_chat == 1 ? "user" : "ai";
                                 let formattedDetail = chat.chat_detail;
-                                let id_dg_chat_ai = chat.id_dg_chat_ai;
 
                                 formattedDetail = formattedDetail.replace(/^### (.*?)(?:\n|$)/gm, '<h3>$1</h3>\n');
 
@@ -2015,26 +1995,19 @@
 
                                             // Tambahkan event onload untuk menghapus loading
                                             const imgHtml = `<div class="image-wrapper" >
-                                                    <img src="img/loading.gif" class="image-loading" alt="Loading..."/>
-                                                    <div class="loading-margin"></div>
+                                                    <img src="img/loading.gif" class="image-loading" alt="Loading..." 
+                                                        style="position: absolute; top: 0; left: 0; width: 100%; height: auto; transition: opacity 0.5s ease;" />
+                                                    
                                                     <img src="${src}" alt="${alt}" class="fade-in-image" 
                                                         style="${style}; opacity: 0; transition: opacity 0.5s ease;" 
                                                         onload="
                                                             this.style.opacity = '1';
-                                                            if (this.previousElementSibling && this.previousElementSibling.previousElementSibling) {
-                                                                // Hapus loading.gif
-                                                                let imgLoading = this.previousElementSibling.previousElementSibling;
-                                                                imgLoading.style.opacity = '0';
-                                                                setTimeout(() => imgLoading.remove(), 500);
-
-                                                                // Hapus loading-margin
-                                                                let loadingMargin = this.previousElementSibling;
-                                                                loadingMargin.style.opacity = '0';
-                                                                setTimeout(() => loadingMargin.remove(), 500);
+                                                            if (this.previousElementSibling) {
+                                                                this.previousElementSibling.style.opacity = '0';
+                                                                setTimeout(() => this.previousElementSibling.remove(), 500);
                                                             }
                                                         "
                                                     />
-
                                                     <a href="${src}" download class="download-btn" title="Download"><i class="fas fa-download"></i></a>
                                                 </div><br>`;
 
@@ -2048,9 +2021,10 @@
                                             const srcLama = escapeHtml(node.querySelector('source')?.getAttribute('src') || '');
                                             const src = srcLama.replace('storage/upload/video/', 'storage/upload/video/'); // bisa modifikasi kalau perlu
 
-                                            const style = escapeHtml(node.getAttribute('style') || 'margin-bottom: 10px;');
+                                            const style = escapeHtml(node.getAttribute('style') || 'max-width: 100%; margin-bottom: 10px;');
 
-                                            const videoHtml = `<div class="image-wrapper" style="position: relative;"><video controls style="${style}">
+                                            const videoHtml = `<div class="image-wrapper" style="position: relative;">
+                                                    <video controls style="${style}">
                                                         <source src="${src}" type="video/mp4" />
                                                         Your browser does not support the video tag.
                                                     </video>
@@ -2109,7 +2083,7 @@
                                 }
 
 
-                                chatBox.append(`<div class="chat-bubble ${bubbleClass}" data-id=${id_dg_chat_ai}>${formattedDetail}</div>`);
+                                chatBox.append(`<div class="chat-bubble ${bubbleClass}">${formattedDetail}</div>`);
                             });
                         } else {
                             chatBox.append('<div class="text-muted">No chats available.</div>');

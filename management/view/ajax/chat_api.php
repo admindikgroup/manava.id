@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($imageData !== false) {
                         file_put_contents($savePath, $imageData);
                         $localUrl = $publicPath . $filename;
-                        $reply = str_replace($placeholders[$index], '<img style="max-width: 200px;" src="' . $localUrl . '" alt="' . htmlspecialchars($imgPrompt) . '" />', $reply);
+                        $reply = str_replace($placeholders[$index], '<img src="' . $localUrl . '" alt="' . htmlspecialchars($imgPrompt) . '" />', $reply);
                     } else {
                         $reply = str_replace($placeholders[$index], "[Failed to download image for '$imgPrompt']", $reply);
                     }
@@ -251,9 +251,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $localUrl = $publicPath . $filename;
 
                     if ($aiType == 'kling') {
-                        $reply = str_replace($placeholders[$index], '<video style="max-width: 200px;" controls><source src="' . $localUrl . '" type="video/mp4">Your browser does not support the video tag.</video>', $reply);
+                        $reply = str_replace($placeholders[$index], '<video controls><source src="' . $localUrl . '" type="video/mp4">Your browser does not support the video tag.</video>', $reply);
                     } else {
-                        $reply = str_replace($placeholders[$index], '<img style="max-width: 200px;" src="' . $localUrl . '" alt="' . htmlspecialchars($imgPrompt) . '" />', $reply);
+                        $reply = str_replace($placeholders[$index], '<img src="' . $localUrl . '" alt="' . htmlspecialchars($imgPrompt) . '" />', $reply);
                     }
                     
                 } else {

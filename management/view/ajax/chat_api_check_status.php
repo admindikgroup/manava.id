@@ -1,7 +1,12 @@
 <?php
+require __DIR__ . '/../../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../..');
+$dotenv->load();
+
 header("Content-Type: application/json");
 
-$replicateToken = getenv('REPLICATE_API_TOKEN');
+$replicateToken = $_ENV['REPLICATE_API_TOKEN'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents("php://input"), true);
