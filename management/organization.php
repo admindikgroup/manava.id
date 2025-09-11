@@ -470,10 +470,11 @@ if ($result_head && mysqli_num_rows($result_head) > 0) {
 
                 </div>
                 <!-- /.card-body -->
-     
-
-           
-          </div>
+                
+                
+                
+              </div>
+              <?php include 'orgz_confirm.php'; ?>
           <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
       </section>
@@ -482,7 +483,6 @@ if ($result_head && mysqli_num_rows($result_head) > 0) {
 
              
 
-<?php include 'orgz_confirm.php'; ?>
 
 
     </div>
@@ -497,6 +497,10 @@ if ($result_head && mysqli_num_rows($result_head) > 0) {
     <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
+   <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Bundle JS (sudah termasuk Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- jQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/autonumeric/4.1.0/autoNumeric.min.js" type="text/javascript">
   </script>

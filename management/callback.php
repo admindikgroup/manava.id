@@ -1,19 +1,21 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 include 'controller/conn.php';
 session_start();
 
 $client = new Google_Client();
-$googleClientId = getenv('GOOGLE_CLIENT_ID');
-$googleClientSecret = getenv('GOOGLE_CLIENT_SECRET');
+$googleClientId = $_ENV['GOOGLE_CLIENT_ID'];
+$googleClientSecret = $_ENV['GOOGLE_CLIENT_SECRET'];
 
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
-$host     = $_SERVER['HTTP_HOST'];
-$basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+$client->setClientId($googleClientId);
+$client->setClientSecret($googleClientSecret);
 
-$redirectUri = $protocol . $host . $basePath . '/callback.php';
+$client->setRedirectUri('http://localhost:8080/mng_dik-main/management/callback.php');
 
-$client->setRedirectUri($redirectUri);
 
 $client->addScope("email");
 $client->addScope("profile");
